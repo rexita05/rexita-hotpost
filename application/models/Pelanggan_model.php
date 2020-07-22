@@ -42,7 +42,7 @@ class Pelanggan_model extends CI_Model {
 		$this->db->update('pelanggan',$object);
 	}
 
-	public function hapus($id){
+	public function delete($id){
 		$this->db->where('id',$id);
 		$this->db->delete('pelanggan');
 	}

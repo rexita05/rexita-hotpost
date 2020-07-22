@@ -43,10 +43,6 @@
                             <i class="fa fa-trash-o"></i>
                             Hapus
                         </a>
-                        <!-- <a href="javascript:void(0)" id="btn-cetak" class="easyui-linkbutton custom-toolbar" plain="true">
-                            <i class="fa fa-print"></i>
-                            Cetak Bukti
-                        </a> -->
                     </div>
                 </div>
             </div>
@@ -110,7 +106,7 @@
                 </button>
             </div>
             <div class="col-sm-3" style="margin-top: 25px; padding: 2px;">
-                <button onclick="batal();" type="button" class="btn btn-block btn-secondary custom-btn-batal">
+                <button onclick="cancel();" type="button" class="btn btn-block btn-secondary custom-btn-batal">
                 <i class="fa fa-times"></i>
                 Batal
                 </button>

@@ -36,7 +36,7 @@ class Pelanggan extends CI_Controller {
 
 	public function update(){
 		$param=$this->input->post();
-		$data=$this->Pelanggan_model->update($param['id']);
+		$data=$this->Pelanggan_model->updateById($param['id']);
 		if($data==null){
 			$result['message']="Data Pelanggan berhasil diubah.";
 		}

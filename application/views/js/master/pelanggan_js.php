@@ -31,7 +31,8 @@
 			singleSelect:true,
 			idField     :'itemid',
 			onDblClickRow:function(index,row){
-
+				view=false;
+				getData(row);
 			},
 			columns:[[
 				{field:'kode',title:'ID Pelanggan',width:"20%",halign:'center',align:'center'},
@@ -214,7 +215,7 @@
 			if(r){
 				var row=$('#dg-pelanggan').datagrid('getSelected');
 				$.ajax({
-					url:"<?php echo base_url("master/pelanggan/hapus");?>",
+					url:"<?php echo base_url("master/pelanggan/delete_row");?>",
 					type:"POST",
 					dataType:'json',
 					data:{id:row.id},
@@ -252,7 +253,7 @@
     	$('#div_simpan').show();
 	}
 
-	function batal(){
+	function cancel(){
 		$('#win-tambah_pelanggan').window('close');
 	}
 </script>

@@ -40,7 +40,7 @@
         </span>
       </a>
       <ul class="treeview-menu" style="background-color: #f4f4f4">
-        <li style="margin-left: 10px;"><a href="<?=base_url()?>pembayaran/hotspot"><i class="fa fa-feed"></i>Hotspot</a></li>
+        <li style="margin-left: 10px;"><a href="<?=base_url()?>pembayaran/hotspot"><i class="fa fa-feed"></i>Internet Hotspot</a></li>
       </ul>
     </li>
   </ul>
