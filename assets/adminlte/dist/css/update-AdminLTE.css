@@ -1,0 +1,22 @@
+.treeview-menu > li > a {
+  	font-size: 13px;
+}
+.content-header > h1 {
+	font-size: 16px;
+}
+
+button, input, select, textarea {
+	font-size: 14px;
+}
+
+.main-header .logo .logo-lg {
+	font-family: Verdana;
+}
+
+.box.box-primary {
+	border-top-color: #c93883;
+}
+
+a:focus{
+	outline:none;text-decoration:none;color:#fff;
+}

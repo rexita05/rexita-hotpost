@@ -1,0 +1,12 @@
+.rx-line-center{
+	line-height: 30px;
+}
+.custom-btn-pink{
+	background-color:#ed459b;
+	border-color:#ff7ec0
+}
+.custom-btn-batal{
+	background-color: #ffffff;
+	border-color: #ed459b;
+	color: #ed459b;
+}
