@@ -45,7 +45,7 @@
     }
 
     function print(row){
-    	// $('#loader').css('display','');
+    	$('#loader').css('display','');
     	var nesindo="CV. NETWORK ECOS SYSTEM INDONESIA (NESINDO)";
     	$.ajax({
 			url     :"<?php echo base_url("pembayaran/hotspot/print"); ?>",
@@ -63,8 +63,11 @@
 			success:function(data){
 				console.log(data);
 				var file_cetak =row.kode+ '.pdf';
-	            $("#frame_nota").attr("src", "<?= base_url() ?>assets/file/"+file_cetak)
-	            $("#cetak_truk").modal("show");
+				if(data.success===true){
+	            	$('#loader').css('display','none');
+	            	$("#frame_nota").attr("src", "<?= base_url() ?>assets/file/"+file_cetak)
+	            	$("#cetak_truk").modal("show");
+	            }
 			},
 			fail: function (e) {
 		        console.log(data);
