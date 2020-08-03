@@ -7,6 +7,7 @@
         <?php $this->load->view('template/head'); ?>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
+        <div id="loader" style="display: none"></div>
         <div class="wrapper">
             <header class="main-header">
                 <?php $this->load->view('template/navbar'); ?>

@@ -42,36 +42,68 @@ class Hotspot extends CI_Controller {
 	    // echo json_encode($result);
 	}
 
-	public function create(){
-		$param=$this->input->post();
-		$data=$this->Pelanggan_model->insert();
-		if($data==null){
-			$result['message']="Data Pelanggan berhasil ditambah.";
+	public function print(){
+		$param = $this->input->post();
+		$data  = $this->Pelanggan_model->print();
+		// $id             = $param['id'];
+		// $kode           = $param['kode'];
+		// $layanan        = $param['layanan'];
+		// $nama_pelanggan = $param['nama_pelanggan'];
+		// $tagihan        = $param['tagihan'];
+		// $terbilang      = $param['terbilang'];
+
+		$master['id']             = $param['id'];
+		$master['kode']           = $param['kode'];
+		$master['layanan'] = "";
+		if($param['layanan']==1){
+			$master['layanan'] = "Internet Hotspot";
 		}
-		echo json_encode($result);
-	}
-
-	public function update(){
-		$param=$this->input->post();
-		$data=$this->Pelanggan_model->updateById($param['id']);
-		if($data==null){
-			$result['message']="Data Pelanggan berhasil diubah.";
+		else{
+			$master['layanan'] = "Pemasangan Hotspot";
 		}
-		echo json_encode($result);
-	}
-
-	public function getData(){
-		$param=$this->input->post();
-		$data=$this->Pelanggan_model->getById($param['id']);
-		echo json_encode($data);
-	}
-
-	public function hapus(){
-		$param=$this->input->post();
-		$data=$this->Pelanggan_model->hapus($param['id']);
-		$result['message']="Data Pelanggan berhasil dihapus.";
-		echo json_encode($data);
-
+		$master['nama_pelanggan'] = $param['nama_pelanggan'];
+		$master['tagihan']        = $param['tagihan'];
+		$master['terbilang']      = $param['terbilang'];
+		// echo json_encode($master);die();
+		$this->load->library('Pdf');
+        $pdf = tcpdf();
+        //initialize document
+        $pdf->setMargins(5, 30, 5);
+        $pdf->AddPage("P", "F4");
+        $pdf->SetFont("helvetica", "", 9);
+        
+        $html='<div>'.$_POST['nesindo'].'</div>';
+        $html.='<div>STRUK BUKTI PEMBAYARAN TAGIHAN INTERNET "REXITA HOTSPOT"</div>';
+        $html.='
+	        <table height="350" width="100%" boder="1px solid black">
+	        	<tr>
+					<td>Layanan</td>
+					<td>:</td>
+					<td>'.$master['layanan'].'</td>
+				</tr>
+				<tr>
+					<td>ID Pelanggan</td>
+					<td>:</td>
+					<td>'.$master['kode'].'</td>
+				</tr>
+				<tr>
+					<td>Nama Pelanggan</td>
+					<td>:</td>
+					<td>'.$master['nama_pelanggan'].'</td>
+				</tr>
+				<tr>
+					<td>RF-ID.NET</td>
+					<td>:</td>
+					<td>1198468155104816122113412</td>
+				</tr>
+			</table>
+		';
+		// echo $html;
+        $pdf->writeHTML($html, true, false, true, false);
+        // $pdf->Footer();
+        $pdf->Output("assets/file/".$master['kode'].".pdf", "F");
+        $return["success"] = TRUE;
+        echo json_encode($return);
 	}
 
 }

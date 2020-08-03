@@ -23,11 +23,30 @@
                             </div>
                         </div>
                     </div>
-                    <table id="dg-pembayaran_pelanggan" class="easyui-datagrid" title="Data Pembayaran Hotspot" style="width: 100%;height:397px;" pagination="false" singleSelect="true" rownumbers="true" fitColumns="false">
+                    <table id="dg-pembayaran_pelanggan" class="easyui-datagrid" title="Data Pembayaran Hotspot" style="width: 100%;height:397px;" pagination="false" toolbar="#toolbar" singleSelect="true" rownumbers="true" fitColumns="false">
                         <!--  -->
                     </table>
+                    <div id="toolbar">
+                        <a href="javascript:void(0)" id="btn-print"  class="easyui-linkbutton custom-toolbar" plain="true">
+                            <i class="fa fa-print"></i>
+                            Bayar
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<div id="cetak_truk" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-detail" style="width: 70%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <iframe id="frame_nota" name="frame_file_surat_detail" width="100%" height ="520px"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

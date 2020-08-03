@@ -8,6 +8,11 @@ class Pelanggan_model extends CI_Model {
         return $query->result();
 	}
 
+	public function print(){
+        $query=$this->db->query("SELECT*FROM pelanggan");
+        return $query->result();
+	}
+
 	public function insert(){
 		$object = array
 		(
