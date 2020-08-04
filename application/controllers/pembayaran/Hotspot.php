@@ -8,6 +8,7 @@ class Hotspot extends CI_Controller {
 		$this->load->model('Pelanggan_model');
 		$this->load->helper('form');
 		$this->load->helper('url');
+		$this->load->helper('function_helper');
 	}
 
 	public function index()
@@ -87,6 +88,7 @@ class Hotspot extends CI_Controller {
 
 					<td width="13%;">Periode</td>
 					<td width="3%;">:</td>
+					<td width="27%;">'.convert_date_period(date("d-m-Y")).'</td>
 				</tr>
 				<tr>
 					<td width="16%;">ID Pelanggan</td>
@@ -133,6 +135,7 @@ class Hotspot extends CI_Controller {
 				<tr>
 					<td width="16%;">Tanggal/Kode</td>
 					<td width="3%;">:</td>
+					<td width="80%;">'.getDatetimeNow("d-m-Y H:i:s").' WIB/45325002/45325RUKI/2KY0Y02Ilk818517/RX</td>
 				</tr>
 			</table><br>
 		';

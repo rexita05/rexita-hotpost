@@ -59,12 +59,11 @@ function convert_date_to_indonesia($date)
     return $tanggal.' '.$bulan.' '.$tahun;
 }
 
-function convert_datetime_to_indonesia($date)
+function convert_date_period($date)
 {
-    $tanggal = date('j', strtotime($date));
+    // $tanggal = date('j', strtotime($date));
     $nomor_bulan = date('n', strtotime($date));
     $tahun = date('Y', strtotime($date));
-    $pukul = date('H:i:s', strtotime($date));
 
     switch ($nomor_bulan) {
         case 1:
@@ -90,6 +89,65 @@ function convert_datetime_to_indonesia($date)
             break;
         case 8:
             $bulan = 'Agustus';
+            break;
+        case 9:
+            $bulan = 'September';
+            break;
+        case 10:
+            $bulan = 'Oktober';
+            break;
+        case 11:
+            $bulan = 'November';
+            break;
+        case 12:
+            $bulan = 'Desember';
+            break;
+    }
+
+    return $bulan.'-'.$tahun;
+}
+
+function getDatetimeNow() {
+    $tz_object = new DateTimeZone('Asia/Bangkok');
+    //date_default_timezone_set('Brazil/East');
+
+    $datetime = new DateTime();
+    $datetime->setTimezone($tz_object);
+    return $datetime->format('d\-m\-Y\ H:i:s');
+}
+
+function convert_datetime_to_indonesia($date)
+{
+    $tanggal = date('j', strtotime($date));
+    $nomor_bulan = date('n', strtotime($date));
+    $tahun = date('Y', strtotime($date));
+    $pukul = date('H:i:s', strtotime($date));
+    // $date = DateTime::createFromFormat('d-m-Y H:i:s',$date)->format('Y-m-d H:i:s');
+
+    switch ($nomor_bulan) {
+        case 1:
+            $bulan = 'Januari';
+            break;
+        case 2:
+            $bulan = 'Februari';
+            break;
+        case 3:
+            $bulan = 'Maret';
+            break;
+        case 4:
+            $bulan = 'April';
+            break;
+        case 5:
+            $bulan = 'Mei';
+            break;
+        case 6:
+            $bulan = 'Juni';
+            break;
+        case 7:
+            $bulan = 'Juli';
+            break;
+        case 8:
+            $bulan = '08';
             break;
         case 9:
             $bulan = 'September';
