@@ -8,7 +8,7 @@ class Pdf extends TCPDF
 
 	public function Header() {
 		// Logo
-		// $this->Image('assets/global/img/header.png', '', 5, '', '', '', '', 'C', true, 300, '', false, false, 0, true, false, true, false);
+		$this->Image('assets/image/watermark_nesindo.png', 50, 19, 100, 37, 'PNG', '', '', true, 300, '', false, false, '', false, false, false);
 	}
 
 	//Page footer

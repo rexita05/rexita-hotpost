@@ -13,13 +13,8 @@ class Hotspot extends CI_Controller {
 
 	public function index()
 	{
-		// data[js] digunakan apabila dalam page tersebut butuh js, file di simpan di views/js
         $this->data['js'] = 'pembayaran/hotspot_js';
-
-        // data['main_view] digunakan untuk mengambil isi dari content body, file disimpan di views/main
         $this->data['main_view'] = 'pembayaran/v_hotspot';
-
-        // Load View
 		$this->load->view('template', $this->data);
 	}
 
@@ -47,8 +42,8 @@ class Hotspot extends CI_Controller {
 		$param = $this->input->post();
 		$data  = $this->Pelanggan_model->print();
 
-		$master['id']             = $param['id'];
-		$master['kode']           = $param['kode'];
+		$master['id'] = $param['id'];
+		$master['kode'] = $param['kode'];
 		$master['layanan'] = "";
 		if($param['layanan']==1){
 			$master['layanan'] = "Internet Hotspot";
@@ -66,8 +61,6 @@ class Hotspot extends CI_Controller {
         $pdf->setMargins(10, 10, 5);
         $pdf->AddPage("P", "F4");
         $pdf->SetFont("fakereceipt", "", 9);
-        // $pdf->SetFont($font_family = 'fakereceipt', $font_variant = ‘’, $fontsize = 11);
-        
         $html='
         <style>
 			.rx-size{
@@ -76,24 +69,34 @@ class Hotspot extends CI_Controller {
 			.rx-size-table{
 				font-size: 8px;
 			}
+			.rx-nesindo{
+				font-size: 8px;
+			}
         </style>';
-        $html.='<div class="rx-size">'.$_POST['nesindo'].'</div>';
-        $html.='<div align="center"><b>STRUK BUKTI PEMBAYARAN TAGIHAN INTERNET "REXITA HOTSPOT"</b></div><br>';
+        // $html.='<div align="center" class="rx-nesindo">'.$_POST['nesindo'].'</div>';
+        $html.='
+	        <table class="rx-nesindo" height="350" width="100%">
+	        	<tr>
+					<td align="center" width="48%;">'.$_POST['nesindo'].'</td>
+				</tr>
+			</table><br>
+		';
+        $html.='<div align="center" style="font-weight:bold;"><b>STRUK BUKTI PEMBAYARAN TAGIHAN INTERNET "REXITA HOTSPOT"</b></div><br>';
         $html.='
 	        <table class="rx-size-table" height="350" width="100%">
 	        	<tr>
 					<td width="16%;">Layanan</td>
 					<td width="3%;">:</td>
-					<td width="27%;">'.$master['layanan'].'</td>
+					<td width="45%;">'.$master['layanan'].'</td>
 
 					<td width="13%;">Periode</td>
 					<td width="3%;">:</td>
-					<td width="27%;">'.convert_date_period(date("d-m-Y")).'</td>
+					<td width="15%;">'.convert_date_period(date("d-m-Y")).'</td>
 				</tr>
 				<tr>
 					<td width="16%;">ID Pelanggan</td>
 					<td width="3%;">:</td>
-					<td width="27%;">'.$master['kode'].'</td>
+					<td width="45%;">'.$master['kode'].'</td>
 
 					<td width="13%;">Tagihan</td>
 					<td width="3%;">:</td>
@@ -102,7 +105,7 @@ class Hotspot extends CI_Controller {
 				<tr>
 					<td width="16%;">Nama Pelanggan</td>
 					<td width="3%;">:</td>
-					<td width="27%;">'.$master['nama_pelanggan'].'</td>
+					<td width="45%;">'.$master['nama_pelanggan'].'</td>
 
 					<td width="13%;">Denda</td>
 					<td width="3%;">:</td>
@@ -111,7 +114,7 @@ class Hotspot extends CI_Controller {
 				<tr>
 					<td width="16%;">RF-ID.NET</td>
 					<td>:</td>
-					<td width="27%;">1198468155104816122113412</td>
+					<td width="45%;">1198468155104816122113412</td>
 
 					<td width="13%;">Total Bayar</td>
 					<td width="3%;">:</td>
@@ -119,29 +122,29 @@ class Hotspot extends CI_Controller {
 				</tr>
 			</table><br>
 		';
-		$html.='<div align="center"><b>ADMIN MENYATAKAN STRUK INI SEBAGAI BUKTI PEMBAYARAN YANG SAH</b></div><br>';
+		$html.='<div align="center" style="font-weight:bold;"><b>ADMIN MENYATAKAN STRUK INI SEBAGAI BUKTI PEMBAYARAN YANG SAH</b></div><br>';
 		$html.='
 	        <table class="rx-size-table" height="350" width="100%">
 	        	<tr>
 					<td width="16%;">Terbilang</td>
 					<td width="3%;">:</td>
-					<td>'.$master['terbilang'].'</td>
+					<td width="76%;">'.$master['terbilang'].'</td>
 				</tr>
 				<tr>
 					<td width="16%;">Dicetak DI</td>
 					<td width="3%;">:</td>
-					<td width="80%;">pprukiyatin_bakalan, 0923;45189;45210;45227;bakalan rt 3 rw 1</td>
+					<td width="76%;">pprukiyatin_bakalan, 0923;45189;45210;45227;bakalan rt 3 rw 1</td>
 				</tr>
 				<tr>
 					<td width="16%;">Tanggal/Kode</td>
 					<td width="3%;">:</td>
-					<td width="80%;">'.getDatetimeNow("d-m-Y H:i:s").' WIB/45325002/45325RUKI/2KY0Y02Ilk818517/RX</td>
+					<td width="76%;">'.getDatetimeNow("d-m-Y H:i:s").' WIB/45325002/45325RUKI/2KY0Y02Ilk818517/RX</td>
 				</tr>
 			</table><br>
 		';
-		// echo $html;
+		
         $pdf->writeHTML($html, true, false, true, false);
-        // $pdf->Footer();
+        // $pdf->IncludeJS("print();");
         $pdf->Output("assets/file/".$master['kode'].".pdf", "F");
         $return["success"] = TRUE;
         echo json_encode($return);

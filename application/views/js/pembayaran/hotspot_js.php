@@ -1,7 +1,16 @@
 <script type="text/javascript">
 	$(function(){
 		filter();
-		$('#btn-print').click(function(event) {
+		$('#btn-print_preview').click(function(event) {
+			var row = $('#dg-pembayaran_pelanggan').datagrid('getSelected');
+			if(row==null){
+				$.messager.alert('Warning!','Tidak ada data yang dipilih.');
+				return false;
+			}
+			// print_preview(row);
+			print_preview(row);
+		});
+		$('#btn-bayar').click(function(event) {
 			var row = $('#dg-pembayaran_pelanggan').datagrid('getSelected');
 			if(row==null){
 				$.messager.alert('Warning!','Tidak ada data yang dipilih.');
@@ -21,8 +30,7 @@
 	    });
 	});
 
-	function filter()
-    {
+	function filter(){
     	var dg = $('#dg-pembayaran_pelanggan').datagrid('loadData',[]);
     	var criteria = $('#txt-search').val();
 		
@@ -44,6 +52,39 @@
 	    });
     }
 
+    function print_preview(row){
+    	$('#loader').css('display','');
+    	var nesindo="CV. NETWORK ECOS SYSTEM INDONESIA (NESINDO)";
+    	$.ajax({
+			url     :"<?php echo base_url("pembayaran/hotspot/print"); ?>",
+			type    :"POST",
+			dataType:'json',
+			data    :{
+				id            :row.id,
+				kode          :row.kode,
+				layanan       :row.layanan,
+				nama_pelanggan:row.nama_pelanggan,
+				tagihan       :row.tagihan,
+				terbilang     :row.terbilang,
+				nesindo       :nesindo,
+			},
+			success:function(data){
+				console.log(data);
+				var file_cetak =row.kode+ '.pdf';
+				if(data.success===true){
+	            	$('#loader').css('display','none');
+	            	$("#struk").attr("src", "<?= base_url() ?>assets/file/"+file_cetak);
+	            	$("#cetak_truk").modal("show");
+	            }
+			},
+			fail: function (e) {
+		        console.log(data);
+		        $('#loader').css('display','none');
+		    }
+		})
+    }
+
+    //cetak tanda preview (beum bisa)
     function print(row){
     	$('#loader').css('display','');
     	var nesindo="CV. NETWORK ECOS SYSTEM INDONESIA (NESINDO)";
@@ -52,21 +93,29 @@
 			type    :"POST",
 			dataType:'json',
 			data    :{
-				id:row.id,
-				kode:row.kode,
-				layanan:row.layanan,
+				id            :row.id,
+				kode          :row.kode,
+				layanan       :row.layanan,
 				nama_pelanggan:row.nama_pelanggan,
-				tagihan:row.tagihan,
-				terbilang:row.terbilang,
-				nesindo:nesindo,
+				tagihan       :row.tagihan,
+				terbilang     :row.terbilang,
+				nesindo       :nesindo,
 			},
 			success:function(data){
 				console.log(data);
-				var file_cetak =row.kode+ '.pdf';
+				var file_cetak=row.kode+'.pdf';
 				if(data.success===true){
 	            	$('#loader').css('display','none');
-	            	$("#frame_nota").attr("src", "<?= base_url() ?>assets/file/"+file_cetak)
-	            	$("#cetak_truk").modal("show");
+	            	var newIframe = document.createElement('iframe');
+					newIframe.width = '0';
+					newIframe.height = '0';
+					newIframe.src = "<?= base_url() ?>assets/file/"+file_cetak;
+					document.body.appendChild(newIframe);
+	            	newIframe.focus();
+					setTimeout(function() {
+					  	newIframe.contentWindow.print();
+					}, 200);
+					return;
 	            }
 			},
 			fail: function (e) {

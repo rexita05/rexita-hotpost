@@ -27,7 +27,15 @@
                         <!--  -->
                     </table>
                     <div id="toolbar">
-                        <a href="javascript:void(0)" id="btn-print"  class="easyui-linkbutton custom-toolbar" plain="true">
+                        <!-- <a href="javascript:void(0)" id="btn-print_preview"  class="easyui-linkbutton custom-toolbar" plain="true">
+                            <i class="fa fa-print"></i>
+                            Bayar
+                        </a> -->
+                        <a href="javascript:void(0)" id="btn-print_preview"  class="easyui-linkbutton custom-toolbar" plain="true">
+                            <i class="fa fa-file-text-o"></i>
+                            Preview
+                        </a>
+                        <a href="javascript:void(0)" id="btn-bayar"  class="easyui-linkbutton custom-toolbar" plain="true">
                             <i class="fa fa-print"></i>
                             Bayar
                         </a>
@@ -45,7 +53,7 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-                <iframe id="frame_nota" name="frame_file_surat_detail" width="100%" height ="520px"></iframe>
+                <iframe name="struk" id="struk" src="" width="100%" height ="520px"></iframe>
             </div>
         </div>
     </div>
