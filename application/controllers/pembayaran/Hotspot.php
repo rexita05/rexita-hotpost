@@ -57,7 +57,7 @@ class Hotspot extends CI_Controller {
 		// echo json_encode($master);die();
 		$this->load->library('Pdf');
         $pdf = tcpdf();
-        //initialize document
+		//initialize document
         $pdf->setMargins(10, 10, 5);
 		$pdf->AddPage("P", "F4");
 		$pdf->SetAutoPageBreak(false, 0);

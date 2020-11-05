@@ -39,7 +39,7 @@
 			type    : "POST",
 			dataType: 'json',
 	    	success:function(data, textStatus, jqXHR){
-	    		console.log(data);
+	    		// console.log(data);
 	        	$('#dg-pembayaran_pelanggan').datagrid('loadData', data);
 	      	},
 	      	error: function(jqXHR, textStatus, errorThrown){
@@ -69,7 +69,7 @@
 				nesindo       :nesindo,
 			},
 			success:function(data){
-				console.log(data);
+				// console.log(data);
 				var file_cetak =row.kode+ '.pdf';
 				if(data.success===true){
 	            	$('#loader').css('display','none');
@@ -78,7 +78,7 @@
 	            }
 			},
 			fail: function (e) {
-		        console.log(data);
+		        // console.log(data);
 		        $('#loader').css('display','none');
 		    }
 		})
@@ -102,7 +102,7 @@
 				nesindo       :nesindo,
 			},
 			success:function(data){
-				console.log(data);
+				// console.log(data);
 				var file_cetak=row.kode+'.pdf';
 				if(data.success===true){
 	            	$('#loader').css('display','none');
@@ -119,7 +119,7 @@
 	            }
 			},
 			fail: function (e) {
-		        console.log(data);
+		        // console.log(data);
 		        $('#loader').css('display','none');
 		    }
 		})
