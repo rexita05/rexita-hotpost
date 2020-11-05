@@ -12,17 +12,11 @@ class Pdf extends TCPDF
 	}
 
 	//Page footer
-	function Footer(){
-		// Position at 25 mm from bottom
-		// $this->SetY(-25);
-		// $this->SetY(-15);
-		// $this->SetX(0);
-
-  //       // Set font
-  //       $this->SetFont('helvetica', '', 5);
-  //       // Page number
-  //       $this->Cell(0, 0, 'Waktu Cetak : '.date("d/m/Y").' '.date("H:i:s").' oleh Dedy Prasetyo'.
-  //       	'                                                                                                                        Halaman '.$this->getAliasNumPage().' dari '.$this->getAliasNbPages().' halaman', 0, false, 'C', 0, '', 0, false, 'T', 'M');
+	public function Footer(){
+		$this->SetY(10);
+		$this->SetX(10);
+        // Page number
+        $this->Cell(0, 0,$this->Image('assets/image/stempel-lunas.png','','','',35), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
 
 }

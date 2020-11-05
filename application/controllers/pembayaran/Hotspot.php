@@ -59,7 +59,8 @@ class Hotspot extends CI_Controller {
         $pdf = tcpdf();
         //initialize document
         $pdf->setMargins(10, 10, 5);
-        $pdf->AddPage("P", "F4");
+		$pdf->AddPage("P", "F4");
+		$pdf->SetAutoPageBreak(false, 0);
         $pdf->SetFont("fakereceipt", "", 9);
         $html='
         <style>
