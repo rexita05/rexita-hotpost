@@ -38,9 +38,9 @@ class Hotspot extends CI_Controller {
 	    // echo json_encode($result);
 	}
 
-	public function print(){
+	public function print_out(){
 		$param = $this->input->post();
-		$data  = $this->Pelanggan_model->print();
+		$data  = $this->Pelanggan_model->print_out();
 
 		$master['id'] = $param['id'];
 		$master['kode'] = $param['kode'];

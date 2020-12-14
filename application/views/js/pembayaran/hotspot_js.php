@@ -16,7 +16,7 @@
 				$.messager.alert('Warning!','Tidak ada data yang dipilih.');
 				return false;
 			}
-			print(row);
+			print_out(row);
 		});
 		$('#dg-pembayaran_pelanggan').datagrid({
 			singleSelect:true,
@@ -56,7 +56,7 @@
     	$('#loader').css('display','');
     	var nesindo="CV. NETWORK ECOS SYSTEM INDONESIA (NESINDO)";
     	$.ajax({
-			url     :"<?php echo base_url("pembayaran/hotspot/print"); ?>",
+			url     :"<?php echo base_url("pembayaran/hotspot/print_out"); ?>",
 			type    :"POST",
 			dataType:'json',
 			data    :{
@@ -85,11 +85,11 @@
     }
 
     //cetak tanda preview (beum bisa)
-    function print(row){
+    function print_out(row){
     	$('#loader').css('display','');
     	var nesindo="CV. NETWORK ECOS SYSTEM INDONESIA (NESINDO)";
     	$.ajax({
-			url     :"<?php echo base_url("pembayaran/hotspot/print"); ?>",
+			url     :"<?php echo base_url("pembayaran/hotspot/print_out"); ?>",
 			type    :"POST",
 			dataType:'json',
 			data    :{

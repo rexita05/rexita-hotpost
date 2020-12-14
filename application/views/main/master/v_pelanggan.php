@@ -107,8 +107,8 @@
             </div>
             <div class="col-sm-3" style="margin-top: 25px; padding: 2px;">
                 <button onclick="cancel();" type="button" class="btn btn-block btn-secondary custom-btn-batal">
-                <i class="fa fa-times"></i>
-                Batal
+                    <i class="fa fa-times"></i>
+                    Batal
                 </button>
             </div>
         </div>

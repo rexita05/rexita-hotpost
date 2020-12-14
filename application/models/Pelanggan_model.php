@@ -8,7 +8,7 @@ class Pelanggan_model extends CI_Model {
         return $query->result();
 	}
 
-	public function print(){
+	public function print_out(){
         $query=$this->db->query("SELECT*FROM pelanggan");
         return $query->result();
 	}
