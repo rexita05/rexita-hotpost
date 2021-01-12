@@ -50,7 +50,7 @@
     </div>
 </section>
 
-<div id="win-tambah_pelanggan" class="easyui-window" title="Tambah Pelanggan Hotspot" style="width:35%;height: 62%;padding:15px;" maximizable="false" collapsible="false" resizable="false" minimizable="false" closed="true">
+<div id="win-tambah_pelanggan" class="panel-window" data-title="Tambah Pelanggan Hotspot" style="width:35%;height: 62%;padding:15px;" maximizable="false" collapsible="false" resizable="false" minimizable="false">
     <form id="form-input" class="col-sm-12">
         <div class="form-group row" style="margin-bottom: 5px;">
             <label class="col-sm-4 col-form-label rx-line-center">ID Pelanggan :</label>

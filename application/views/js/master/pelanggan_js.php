@@ -2,8 +2,11 @@
 	$(function(){
 		filter();
 		$('#btn-tambah').click(function(event) {
-			$('#win-tambah_pelanggan').window('open');
-			reset_form();
+			$('#win-tambah_pelanggan').window({
+				onOpen:function(){
+					reset_form();
+				}
+			});  
 			$('#div_update').hide();
 		});
 		$('#btn-edit').click(function(event) {
@@ -151,8 +154,12 @@
 			dataType:'json',
 			data    :{id:row.id},
 			success:function(data){
-				$('#win-tambah_pelanggan').window('open');
-          		set_form(data);
+				$('#win-tambah_pelanggan').window({
+					onOpen:function(){
+						set_form(data);
+					}
+				});
+          		// set_form(data);
 			},
 			error:function(jqXHR, textStatus, errorThrown){
               	alert('Error,something goes wrong');
