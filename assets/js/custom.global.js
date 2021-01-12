@@ -22,7 +22,6 @@ $('.panel-window').each(function () {
         resizable  : false,
         minimizable: false
     });
-
     // Close Window Panel on Start
     $(this).window('close')
 });
