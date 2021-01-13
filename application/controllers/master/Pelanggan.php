@@ -12,11 +12,8 @@ class Pelanggan extends CI_Controller {
 
 	public function index()
 	{
-		// data[js] digunakan apabila dalam page tersebut butuh js, file di simpan di views/js
         $this->data['js'] = 'master/pelanggan_js';
-        // data['main_view] digunakan untuk mengambil isi dari content body, file disimpan di views/main
         $this->data['main_view'] = 'master/v_pelanggan';
-        // Load View
 		$this->load->view('template', $this->data);
 	}
 

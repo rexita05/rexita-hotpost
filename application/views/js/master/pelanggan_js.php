@@ -54,7 +54,7 @@
 			type    :"POST",
 			dataType:'json',
 			success:function(data, textStatus, jqXHR){
-				console.log(data);
+				// console.log(data);
 				$('#dg-pelanggan').datagrid('loadData',data);
 			},
 			error:function(){
