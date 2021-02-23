@@ -244,3 +244,17 @@ function generate_success_response($message, $data = [])
     echo json_encode($response);
     die();
 }
+
+function money($value, $decimal = 0)
+{
+
+    if ((float)$value == 0) {
+        return '0';
+    } elseif ((float)$value < 0) {
+        // return '(Rp. '.number_format($value, 2, ',', '.').')';
+        return '('.number_format($value*(-1), 0, ',', ',').')';
+    } else {
+        // return 'Rp. '.number_format($value, 2, ',', '.');
+        return number_format($value, $decimal, ',', ',');
+    }
+}

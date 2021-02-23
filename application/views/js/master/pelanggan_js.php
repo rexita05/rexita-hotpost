@@ -1,6 +1,29 @@
 <script type="text/javascript">
+	var data = [
+		{
+			id: 1,
+			text: 'Internet Hotspot'
+		},
+		{
+			id: 2,
+			text: 'Pemasangan Hotspot'
+		}
+	];
+
 	$(function(){
 		filter();
+		// inputterbilang();
+		// var rupiah = document.getElementById('txt-tagihan');
+		// rupiah.addEventListener('keyup', function(e){
+			// rupiah.value = formatRupiah(this.value, 'Rp ');
+		// });
+
+		$('#cmb-layanan').select2({
+			dropdownParent:$('#win-tambah_pelanggan'),
+			placeholder: 'Pilih Layanan',
+			data:data
+		});
+
 		$('#btn-tambah').click(function(event) {
 			$('#win-tambah_pelanggan').window({
 				onOpen:function(){
@@ -41,10 +64,16 @@
 				{field:'kode',title:'ID Pelanggan',width:"20%",halign:'center',align:'center'},
 				{field:'nama_pelanggan',title:'Nama Pelanggan',width:"35%",halign:'center',align:'left'},
 				{field:'keterangan',title:'Keterangan',width:"25%",halign:'center',align:'left'},
-				{field:'tagihan',title:'Total Bayar',width:"10%",halign:'center',align:'right'},
+				{field:'tagihan',title:'Total Bayar',width:"10%",halign:'center',align:'right', formatter: formatRupiah},
 	        ]],
 	    });
 	})
+
+	function inputterbilang() {
+		$('.money').mask('0.000.000.000', {reverse: true});
+       	var input = document.getElementById("txt-tagihan").value.replace(/\./g, "");
+       	document.getElementById("txt-terbilang").value = terbilang(input).replace(/ +/g, ' ');
+    } 
 
 	function filter(){
 		var dg=$('#dg-pelanggan').datagrid('loadData',[]);
@@ -103,7 +132,7 @@
 			url     :"<?php echo base_url("master/pelanggan/create"); ?>",
 			type    :"POST",
 			dataType:'json',
-			data    :'kode='+kode+'&layanan='+layanan+'&nama_pelanggan='+nama_pelanggan+'&tagihan='+tagihan+'&terbilang='+terbilang+'&keterangan='+keterangan,
+			data    :'kode='+kode+'&layanan='+layanan+'&nama_pelanggan='+nama_pelanggan+'&tagihan='+toUang(tagihan)+'&terbilang='+terbilang+'&keterangan='+keterangan,
 	    	success:function(data, textStatus, jqXHR){
 	    		$.messager.alert('Success!',data.message);
 	    		$('#win-tambah_pelanggan').window('close');
@@ -131,7 +160,7 @@
 			url     :"<?php echo base_url("master/pelanggan/update"); ?>",
 			type    :"POST",
 			dataType:'json',
-			data    :'id='+id+'&kode='+kode+'&layanan='+layanan+'&nama_pelanggan='+nama_pelanggan+'&tagihan='+tagihan+'&terbilang='+terbilang+'&keterangan='+keterangan,
+			data    :'id='+id+'&kode='+kode+'&layanan='+layanan+'&nama_pelanggan='+nama_pelanggan+'&tagihan='+toUang(tagihan)+'&terbilang='+terbilang+'&keterangan='+keterangan,
     		success:function(data){
     			$.messager.alert('Success!',data.message);
 				$('#win-tambah_pelanggan').window('close');
@@ -176,7 +205,7 @@
     		$('#txt-kode_pelanggan').val(data[0].kode);
 	    	$('#cmb-layanan').val(data[0].layanan).change();
 	    	$('#txt-nama_pelanggan').val(data[0].nama_pelanggan);
-	    	$('#txt-tagihan').val(data[0].tagihan);
+	    	$('#txt-tagihan').val('Rp '+formatRupiah(data[0].tagihan));
 	    	$('#txt-terbilang').val(data[0].terbilang);
 	    	$('#txt-keterangan').val(data[0].keterangan);
 
@@ -196,7 +225,7 @@
     		$('#txt-kode_pelanggan').val(data[0].kode);
 	    	$('#cmb-layanan').val(data[0].layanan).change();
 	    	$('#txt-nama_pelanggan').val(data[0].nama_pelanggan);
-	    	$('#txt-tagihan').val(data[0].tagihan);
+	    	$('#txt-tagihan').val('Rp '+formatRupiah(data[0].tagihan));
 	    	$('#txt-terbilang').val(data[0].terbilang);
 	    	$('#txt-keterangan').val(data[0].keterangan);
 
@@ -205,7 +234,7 @@
 	    	$('#cmb-layanan').attr('disabled',false);
 	    	$('#txt-nama_pelanggan').attr('disabled',false);
 	    	$('#txt-tagihan').attr('disabled',false);
-	    	$('#txt-terbilang').attr('disabled',false);
+	    	$('#txt-terbilang').attr('disabled',true);
 	    	$('#txt-keterangan').attr('disabled',false);
 
 	    	$('#div_simpan').hide();
@@ -247,7 +276,7 @@
     	$('#cmb-layanan').attr('disabled',false);
     	$('#txt-nama_pelanggan').attr('disabled',false);
     	$('#txt-tagihan').attr('disabled',false);
-    	$('#txt-terbilang').attr('disabled',false);
+    	$('#txt-terbilang').attr('disabled',true);
     	$('#txt-keterangan').attr('disabled',false);
 
     	$('#txt-id').val('');

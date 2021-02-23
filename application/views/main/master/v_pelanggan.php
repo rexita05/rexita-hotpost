@@ -62,10 +62,10 @@
         <div class="form-group row" style="margin-bottom: 5px;">
             <label class="col-sm-4 col-form-label rx-line-center">Layanan :</label>
             <div class="col-sm-8">
-            <select id="cmb-layanan" name="layanan" class="form-control form-control-sm">
-                <option value="1">Internet Hotspot</option>
-                <option value="2">Pemasangan Hotspot</option>
-            </select>
+                <select id="cmb-layanan" name="layanan" class="form-control form-control-sm" style="width: 100%;">
+                    <!-- <option value="1">Internet Hotspot</option>
+                    <option value="2">Pemasangan Hotspot</option> -->
+                </select>
             </div>
         </div>
         <div class="form-group row" style="margin-bottom: 5px;">
@@ -77,7 +77,8 @@
         <div class="form-group row" style="margin-bottom: 5px;">
             <label class="col-sm-4 col-form-label rx-line-center">Tagihan :</label>
             <div class="col-sm-5">
-                <input id="txt-tagihan" name="tagihan" type="text" class="form-control form-control-sm">
+                <input id="txt-tagihan" name="tagihan" type="text" onkeyup="inputterbilang();" class="money form-control form-control-sm">
+                <!-- <input id="txt-tagihan" class="col-lg-9 form-control form-control-sm easyui-numberbox" style="text-align: right;" type="text"> -->
             </div>
         </div>
         <div class="form-group row" style="margin-bottom: 5px;">

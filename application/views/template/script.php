@@ -38,11 +38,19 @@
 <script src="<?php echo base_url('assets/adminlte/') ?>bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url('assets/adminlte/') ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- EasyUI -->
-<script type="text/javascript" src="<?php echo base_url('assets/easyui/jquery.easyui.min.js');?>"></script>
+<script src="<?php echo base_url('assets/easyui/') ?>jquery.easyui.min.js"></script>
 <script src="<?php echo base_url('assets/js/custom.global.js');?>" type="text/javascript"></script>
+<!-- select2 -->
+<script src="<?php echo base_url('assets/js/select2.min.js');?>" type="text/javascript"></script>
 <!-- CSS Element Queries -->
+<!-- terbilang -->
+<script src="<?php echo base_url('assets/js/terbilang.js');?>" type="text/javascript"></script>
+<!-- <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js');?>" type="text/javascript"></script> -->
+<script src="<?php echo base_url('assets/js/jquery.mask.min.js');?>" type="text/javascript"></script>
+
 <script src="<?php echo base_url('assets/') ?>css-element-queries/src/ResizeSensor.js"></script>
 <script src="<?php echo base_url('assets/') ?>css-element-queries/src/ElementQueries.js"></script>
+<script src="<?php echo base_url('assets/js/utils.js');?>" type="text/javascript"></script>
 <script type="text/javascript">
     var toolbar = [{
         text:'Add',

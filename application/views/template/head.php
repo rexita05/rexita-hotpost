@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>bower_components/bootstrap/dist/css/update-bootstrap.css">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>bower_components/font-awesome/css/font-awesome.min.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="<?php echo base_url('assets/css/') ?>select2.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>bower_components/Ionicons/css/ionicons.min.css">
 <!-- Theme style -->

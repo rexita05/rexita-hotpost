@@ -82,7 +82,11 @@ class Hotspot extends CI_Controller {
 				</tr>
 			</table><br>
 		';
-        $html.='<div align="center" style="font-weight:bold;"><b>STRUK BUKTI PEMBAYARAN TAGIHAN INTERNET "REXITA HOTSPOT"</b></div><br>';
+		$html.='<div align="center" style="font-weight:bold;"><b>STRUK BUKTI PEMBAYARAN TAGIHAN INTERNET "REXITA HOTSPOT"</b></div><br>';
+		$diskon=0;
+		$denda=0;
+		$total=$master['tagihan']+$denda-$diskon;
+		// $grand_tot=$total-$diskon;
         $html.='
 	        <table class="rx-size-table" height="350" width="100%">
 	        	<tr>
@@ -91,8 +95,7 @@ class Hotspot extends CI_Controller {
 					<td width="45%;">'.$master['layanan'].'</td>
 
 					<td width="13%;">Periode</td>
-					<td width="3%;">:</td>
-					<td width="15%;">'.convert_date_period(date("d-m-Y")).'</td>
+					<td width="20%;">: '.convert_date_period(date("d-m-Y")).'</td>
 				</tr>
 				<tr>
 					<td width="16%;">ID Pelanggan</td>
@@ -100,8 +103,8 @@ class Hotspot extends CI_Controller {
 					<td width="45%;">'.$master['kode'].'</td>
 
 					<td width="13%;">Tagihan</td>
-					<td width="3%;">:</td>
-					<td width="27%;">'.$master['tagihan'].'</td>
+					<td width="6%;">: Rp </td>
+					<td width="10.4%;" align="right">'.money($master['tagihan']).'</td>
 				</tr>
 				<tr>
 					<td width="16%;">Nama Pelanggan</td>
@@ -109,8 +112,17 @@ class Hotspot extends CI_Controller {
 					<td width="45%;">'.$master['nama_pelanggan'].'</td>
 
 					<td width="13%;">Denda</td>
-					<td width="3%;">:</td>
-					<td width="27%;">Rp 0</td>
+					<td width="6%;">: Rp </td>
+					<td width="10.4%;" align="right">'.money($denda).'</td>
+				</tr>
+				<tr>
+					<td width="16%;">Operasional</td>
+					<td>:</td>
+					<td width="45%;">FO2Core+Conv/N300RE</td>
+
+					<td width="13%;">Diskon</td>
+					<td width="6 %;">: Rp</td> 
+					<td width="10.4%;" align="right">'.money($diskon).'</td>
 				</tr>
 				<tr>
 					<td width="16%;">RF-ID.NET</td>
@@ -118,8 +130,8 @@ class Hotspot extends CI_Controller {
 					<td width="45%;">1198468155104816122113412</td>
 
 					<td width="13%;">Total Bayar</td>
-					<td width="3%;">:</td>
-					<td width="27%;">'.$master['tagihan'].'</td>
+					<td width="6%;">: Rp </td>
+					<td width="10.4%;" align="right">'.money($total).'</td>
 				</tr>
 			</table><br>
 		';
@@ -132,7 +144,7 @@ class Hotspot extends CI_Controller {
 					<td width="76%;">'.$master['terbilang'].'</td>
 				</tr>
 				<tr>
-					<td width="16%;">Dicetak DI</td>
+					<td width="16%;">Dicetak Di</td>
 					<td width="3%;">:</td>
 					<td width="76%;">pprukiyatin_bakalan, 0923;45189;45210;45227;bakalan rt 3 rw 1</td>
 				</tr>
