@@ -84,7 +84,7 @@ class Hotspot extends CI_Controller {
 			</table><br>
 		';
 		$html.='<div align="center" style="font-weight:bold;"><b>STRUK BUKTI PEMBAYARAN TAGIHAN INTERNET "REXITA HOTSPOT"</b></div><br>';
-		$diskon=20000;
+		$diskon=0;
 		$denda=0;
 		$total=$master['tagihan']+$denda-$diskon;
 		// $grand_tot=$total-$diskon;
@@ -142,7 +142,7 @@ class Hotspot extends CI_Controller {
 	        	<tr>
 					<td width="16%">Terbilang</td>
 					<td width="3%">:</td>
-					<td width="76%">'.$master['terbilang'].'</td>
+					<td width="76%">'.terbilang($total).' Rupiah</td>
 				</tr>
 				<tr>
 					<td width="16%">Dicetak Di</td>
