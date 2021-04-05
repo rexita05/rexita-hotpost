@@ -21,7 +21,7 @@
 		$('#cmb-layanan').select2({
 			dropdownParent:$('#win-tambah_pelanggan'),
 			placeholder: 'Pilih Layanan',
-			data:data
+			data:data,
 		});
 
 		$('#btn-tambah').click(function(event) {
@@ -63,7 +63,7 @@
 			columns:[[
 				{field:'kode',title:'ID Pelanggan',width:"20%",halign:'center',align:'center'},
 				{field:'nama_pelanggan',title:'Nama Pelanggan',width:"35%",halign:'center',align:'left'},
-				{field:'keterangan',title:'Keterangan',width:"25%",halign:'center',align:'left'},
+				{field:'operasional',title:'Operasional',width:"25%",halign:'center',align:'left'},
 				{field:'tagihan',title:'Total Bayar',width:"10%",halign:'center',align:'right', formatter: formatRupiah},
 	        ]],
 	    });
@@ -101,7 +101,7 @@
     	var nama_pelanggan=$('#txt-nama_pelanggan').val();
     	var tagihan=$('#txt-tagihan').val();
     	var terbilang=$('#txt-terbilang').val();
-    	var keterangan=$('#txt-keterangan').val();
+    	var operasional=$('#txt-operasional').val();
 
     	if (kode=='') {
 	      	$.messager.alert('Warning!', 'ID Pelanggan tidak boleh kosong.');
@@ -123,8 +123,8 @@
 	      	$.messager.alert('Warning!', 'Terbilang tidak boleh kosong.');
 	      	return false;
 	    }
-	    if (keterangan=='') {
-	      	$.messager.alert('Warning!', 'Keterangan tidak boleh kosong.');
+	    if (operasional=='') {
+	      	$.messager.alert('Warning!', 'Operasional tidak boleh kosong.');
 	      	return false;
 	    }
 
@@ -132,7 +132,7 @@
 			url     :"<?php echo base_url("master/pelanggan/create"); ?>",
 			type    :"POST",
 			dataType:'json',
-			data    :'kode='+kode+'&layanan='+layanan+'&nama_pelanggan='+nama_pelanggan+'&tagihan='+toUang(tagihan)+'&terbilang='+terbilang+'&keterangan='+keterangan,
+			data    :'kode='+kode+'&layanan='+layanan+'&nama_pelanggan='+nama_pelanggan+'&tagihan='+toUang(tagihan)+'&terbilang='+terbilang+'&operasional='+operasional,
 	    	success:function(data, textStatus, jqXHR){
 	    		$.messager.alert('Success!',data.message);
 	    		$('#win-tambah_pelanggan').window('close');
@@ -154,13 +154,13 @@
     	var nama_pelanggan=$('#txt-nama_pelanggan').val();
     	var tagihan=$('#txt-tagihan').val();
     	var terbilang=$('#txt-terbilang').val();
-    	var keterangan=$('#txt-keterangan').val();
+    	var operasional=$('#txt-operasional').val();
 
     	$.ajax({
 			url     :"<?php echo base_url("master/pelanggan/update"); ?>",
 			type    :"POST",
 			dataType:'json',
-			data    :'id='+id+'&kode='+kode+'&layanan='+layanan+'&nama_pelanggan='+nama_pelanggan+'&tagihan='+toUang(tagihan)+'&terbilang='+terbilang+'&keterangan='+keterangan,
+			data    :'id='+id+'&kode='+kode+'&layanan='+layanan+'&nama_pelanggan='+nama_pelanggan+'&tagihan='+toUang(tagihan)+'&terbilang='+terbilang+'&operasional='+operasional,
     		success:function(data){
     			$.messager.alert('Success!',data.message);
 				$('#win-tambah_pelanggan').window('close');
@@ -207,7 +207,7 @@
 	    	$('#txt-nama_pelanggan').val(data[0].nama_pelanggan);
 	    	$('#txt-tagihan').val('Rp '+formatRupiah(data[0].tagihan));
 	    	$('#txt-terbilang').val(data[0].terbilang);
-	    	$('#txt-keterangan').val(data[0].keterangan);
+	    	$('#txt-operasional').val(data[0].operasional);
 
 	    	$('#txt-id').attr('disabled',true);
 	    	$('#txt-kode_pelanggan').attr('disabled',true);
@@ -215,7 +215,7 @@
 	    	$('#txt-nama_pelanggan').attr('disabled',true);
 	    	$('#txt-tagihan').attr('disabled',true);
 	    	$('#txt-terbilang').attr('disabled',true);
-	    	$('#txt-keterangan').attr('disabled',true);
+	    	$('#txt-operasional').attr('disabled',true);
 
 	    	$('#div_update').hide();
 	    	$('#div_simpan').hide();
@@ -227,7 +227,7 @@
 	    	$('#txt-nama_pelanggan').val(data[0].nama_pelanggan);
 	    	$('#txt-tagihan').val('Rp '+formatRupiah(data[0].tagihan));
 	    	$('#txt-terbilang').val(data[0].terbilang);
-	    	$('#txt-keterangan').val(data[0].keterangan);
+	    	$('#txt-operasional').val(data[0].operasional);
 
 	    	$('#txt-id').attr('disabled',true);
 	    	$('#txt-kode_pelanggan').attr('disabled',false);
@@ -235,7 +235,7 @@
 	    	$('#txt-nama_pelanggan').attr('disabled',false);
 	    	$('#txt-tagihan').attr('disabled',false);
 	    	$('#txt-terbilang').attr('disabled',true);
-	    	$('#txt-keterangan').attr('disabled',false);
+	    	$('#txt-operasional').attr('disabled',false);
 
 	    	$('#div_simpan').hide();
 	    	$('#div_update').show();
@@ -277,14 +277,14 @@
     	$('#txt-nama_pelanggan').attr('disabled',false);
     	$('#txt-tagihan').attr('disabled',false);
     	$('#txt-terbilang').attr('disabled',true);
-    	$('#txt-keterangan').attr('disabled',false);
+    	$('#txt-operasional').attr('disabled',false);
 
     	$('#txt-id').val('');
     	$('#txt-kode_pelanggan').val('');
     	$('#txt-nama_pelanggan').val('');
     	$('#txt-tagihan').val('');
     	$('#txt-terbilang').val('');
-    	$('#txt-keterangan').val('');
+    	$('#txt-operasional').val('');
 
     	$('#div_simpan').show();
 	}

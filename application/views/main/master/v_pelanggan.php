@@ -88,9 +88,9 @@
             </div>
         </div>
         <div class="form-group row" style="margin-bottom: 5px;">
-            <label class="col-sm-4 col-form-label rx-line-center">Keterangan :</label>
+            <label class="col-sm-4 col-form-label rx-line-center">Operasional :</label>
             <div class="col-sm-8">
-                <textarea id="txt-keterangan" name="keterangan" class="form-control form-control-sm kt-font-sm" style="resize: none;"></textarea>
+                <textarea id="txt-operasional" name="keterangan" class="form-control form-control-sm kt-font-sm" style="resize: none;"></textarea>
             </div>
         </div>
         <div class="form-group row">

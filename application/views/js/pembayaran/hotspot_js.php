@@ -24,7 +24,7 @@
 			columns     :[[
 				{field:'kode',title:'ID Pelanggan',width:"20%",halign:'center',align:'center'},
 				{field:'nama_pelanggan',title:'Nama Pelanggan',width:"35%",halign:'center',align:'left'},
-				{field:'keterangan',title:'Keterangan',width:"25%",halign:'center',align:'left'},
+				{field:'operasional',title:'Operasional',width:"25%",halign:'center',align:'left'},
 				{field:'tagihan',title:'Total Bayar',width:"10%",halign:'center',align:'right', formatter: formatRupiah},
 	        ]],
 	    });
@@ -75,6 +75,7 @@
 				kode          :row.kode,
 				layanan       :row.layanan,
 				nama_pelanggan:row.nama_pelanggan,
+                operasional   :row.operasional,
 				tagihan       :row.tagihan,
 				terbilang     :row.terbilang,
 				nesindo       :nesindo,
@@ -108,6 +109,7 @@
 				kode          :row.kode,
 				layanan       :row.layanan,
 				nama_pelanggan:row.nama_pelanggan,
+                operasional   :row.operasional,
 				tagihan       :row.tagihan,
 				terbilang     :row.terbilang,
 				nesindo       :nesindo,

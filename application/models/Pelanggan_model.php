@@ -21,7 +21,7 @@ class Pelanggan_model extends CI_Model {
             'nama_pelanggan'=>$this->input->post('nama_pelanggan'),
             'tagihan'=>$this->input->post('tagihan'),
             'terbilang'=>$this->input->post('terbilang'),
-            'keterangan'=>$this->input->post('keterangan')
+            'operasional'=>$this->input->post('operasional')
 		);
 		$this->db->insert('pelanggan',$object);
 	}
@@ -40,7 +40,7 @@ class Pelanggan_model extends CI_Model {
             'nama_pelanggan'=>$this->input->post('nama_pelanggan'),
             'tagihan'=>$this->input->post('tagihan'),
             'terbilang'=>$this->input->post('terbilang'),
-            'keterangan'=>$this->input->post('keterangan')
+            'operasional'=>$this->input->post('operasional')
 		);
 
 		$this->db->where('id',$id);
