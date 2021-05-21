@@ -12,7 +12,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label rx-line-center">Nama Pelanggan :</label>
                                 <div class="col-sm-5">
-                                    <input id="txt-kriteria" type="text" class="form-control" placeholder="Cari...">
+                                    <input id="txt-search" type="text" class="form-control" placeholder="Cari..." onkeyup="filter()">
                                 </div>
                                 <div class="col-sm-3" style="margin-left: -25px;">
                                     <button onclick="filter();" type="button" class="btn btn-block btn-primary custom-btn-pink">

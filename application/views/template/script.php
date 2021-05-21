@@ -51,6 +51,7 @@
 <script src="<?php echo base_url('assets/') ?>css-element-queries/src/ResizeSensor.js"></script>
 <script src="<?php echo base_url('assets/') ?>css-element-queries/src/ElementQueries.js"></script>
 <script src="<?php echo base_url('assets/js/utils.js');?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/js/accounting.min.js');?>" type="text/javascript"></script>
 <script type="text/javascript">
     var toolbar = [{
         text:'Add',

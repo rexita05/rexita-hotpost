@@ -40,6 +40,7 @@ class Hotspot extends CI_Controller {
 
 	public function print_out(){
 		$param = $this->input->post();
+        // print_r($_POST['diskon']);die();
 		$data  = $this->Pelanggan_model->print_out();
 
 		$master['id'] = $param['id'];
@@ -84,7 +85,13 @@ class Hotspot extends CI_Controller {
 			</table><br>
 		';
 		$html.='<div align="center" style="font-weight:bold;"><b>STRUK BUKTI PEMBAYARAN TAGIHAN INTERNET "REXITA HOTSPOT"</b></div><br>';
-		$diskon=0;
+        $diskon=$_POST['diskon'];
+        // if($diskon==''){
+        //     $diskon=0;
+        // }
+        // else{
+        //     $diskon=$_POST['diskon'];
+        // }
 		$denda=0;
 		$total=$master['tagihan']+$denda-$diskon;
 		// $grand_tot=$total-$diskon;

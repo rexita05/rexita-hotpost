@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	var data = [
+	var list = [
 		{
 			id: 1,
 			text: 'Internet Hotspot'
@@ -21,7 +21,7 @@
 		$('#cmb-layanan').select2({
 			dropdownParent:$('#win-tambah_pelanggan'),
 			placeholder: 'Pilih Layanan',
-			data:data,
+			data:list,
 		});
 
 		$('#btn-tambah').click(function(event) {
@@ -73,18 +73,21 @@
 		$('.money').mask('0.000.000.000', {reverse: true});
        	var input = document.getElementById("txt-tagihan").value.replace(/\./g, "");
        	document.getElementById("txt-terbilang").value = terbilang(input).replace(/ +/g, ' ');
-    } 
+    }
 
 	function filter(){
 		var dg=$('#dg-pelanggan').datagrid('loadData',[]);
 		var criteria=$('#txt-search').val();
+        data={
+            criteria : criteria,
+        }
 		$.ajax({
 			url     :"<?php echo base_url("master/pelanggan/filter"); ?>",
 			type    :"POST",
 			dataType:'json',
+            data:data,
 			success:function(data, textStatus, jqXHR){
-				// console.log(data);
-				$('#dg-pelanggan').datagrid('loadData',data);
+				$('#dg-pelanggan').datagrid('loadData',data.data);
 			},
 			error:function(){
 				alert('Error,something goes wrong');
@@ -178,14 +181,14 @@
 
 	function getData(row){
 		$.ajax({
-			url     :"<?php echo base_url("master/pelanggan/getData"); ?>",
+            url     :"<?php echo base_url("master/pelanggan/getPerkode"); ?>",
 			type    :"POST",
 			dataType:'json',
 			data    :{id:row.id},
 			success:function(data){
 				$('#win-tambah_pelanggan').window({
 					onOpen:function(){
-						set_form(data);
+						set_form(data.data);
 					}
 				});
           		// set_form(data);

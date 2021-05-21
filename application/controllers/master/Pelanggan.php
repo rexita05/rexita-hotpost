@@ -8,6 +8,7 @@ class Pelanggan extends CI_Controller {
 		$this->load->model('Pelanggan_model');
 		$this->load->helper('form');
 		$this->load->helper('url');
+        $this->load->helper('api_helper');
 	}
 
 	public function index()
@@ -18,8 +19,13 @@ class Pelanggan extends CI_Controller {
 	}
 
 	public function filter(){
-		$object=$this->Pelanggan_model->getPelanggan();
-		echo json_encode($object);
+        $param=$this->input->post();
+        $criteria="";
+        if($param['criteria']!=null || $param['criteria']!=""){
+            $criteria="/".$param['criteria'];
+        }
+        $result = sendRequest("POST", "http://localhost/slim-api/master/pelanggan/search".$criteria, [], false);
+        echo json_encode($result);
 	}
 
 	public function create(){
@@ -47,10 +53,9 @@ class Pelanggan extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	public function getData(){
-		$param=$this->input->post();
-		$data=$this->Pelanggan_model->getById($param['id']);
-		echo json_encode($data);
+	public function getPerkode(){
+        $result = sendRequest("GET", "http://localhost/slim-api/master/pelanggan/getPerkode/".$_POST['id'], [], false);
+        echo json_encode($result);
 	}
 
 }

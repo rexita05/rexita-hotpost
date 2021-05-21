@@ -59,7 +59,7 @@ function appGridNumberFormatter(val, row) {
 	return accounting.formatNumber(val);
 }
 function formatIndo(val, row) {
-	return accounting.formatMoney(val,"", 2, ".", ",");
+	return accounting.formatMoney(val," ", 0, ".", ",");
 }
 function appGridMoneyFormatter(val, row) {
 	return accounting.formatMoney(val);
