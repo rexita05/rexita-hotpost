@@ -24,7 +24,7 @@ class Pelanggan extends CI_Controller {
         if($param['criteria']!=null || $param['criteria']!=""){
             $criteria="/".$param['criteria'];
         }
-        $result = sendRequest("POST", "http://localhost/slim-api/master/pelanggan/search".$criteria, [], false);
+        $result = sendRequest("POST", "master/pelanggan/search".$criteria, [], false);
         echo json_encode($result);
 	}
 
@@ -54,7 +54,7 @@ class Pelanggan extends CI_Controller {
 	}
 
 	public function getPerkode(){
-        $result = sendRequest("GET", "http://localhost/slim-api/master/pelanggan/getPerkode/".$_POST['id'], [], false);
+        $result = sendRequest("GET", "master/pelanggan/getPerkode/".$_POST['id'], [], "api");
         echo json_encode($result);
 	}
 

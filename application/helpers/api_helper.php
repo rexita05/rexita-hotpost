@@ -1,8 +1,9 @@
 <?php
+// function sendRequest($method, $module, $path, $data, $type = false)
 function sendRequest($method, $url, $data, $type = false)
 {
   $headers = array();
-//   $headers[]  = "Content-Type: application/json";
+  $headers[]  = "Content-Type: application/json";
 //   $headers[]  = "Host: 127.0.0.1";
 
 //   if (isset($_SESSION['token'])) {
@@ -11,7 +12,7 @@ function sendRequest($method, $url, $data, $type = false)
 //   }
 
   $curl_handle = curl_init();
-  curl_setopt($curl_handle, CURLOPT_URL, $url);
+  curl_setopt($curl_handle, CURLOPT_URL, API . $url);
   curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, TRUE);
   curl_setopt($curl_handle, CURLOPT_POST, TRUE);
   curl_setopt($curl_handle, CURLOPT_CUSTOMREQUEST, $method);
@@ -23,7 +24,8 @@ function sendRequest($method, $url, $data, $type = false)
     # code...
     echo 'Method : '.$method.'<br>';
     echo 'URL : ';
-    echo (BASE_URL_API . $module . '/' . $path);
+    // echo (BASE_URL_API . $module . '/' . $path);
+    echo (API.$url);
     echo '<br><br>Params : <br>';
     echo json_encode($data);
     echo '<br><br>Response : <br>';
@@ -45,7 +47,8 @@ function sendRequest($method, $url, $data, $type = false)
       # code...
       echo 'Method : '.$method.'<br>';
       echo 'URL : ';
-      echo ($url);
+    //   echo (BASE_URL_API . $module . '/' . $path);
+      echo (API.$url);
       echo '<br><br>Params : <br>';
       echo json_encode($data);
       echo '<br><br>Response : <br>';
