@@ -5,7 +5,6 @@ class Pelanggan extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model('Pelanggan_model');
 		$this->load->helper('form');
 		$this->load->helper('url');
         $this->load->helper('api_helper');
@@ -28,33 +27,23 @@ class Pelanggan extends CI_Controller {
         echo json_encode($result);
 	}
 
-	public function create(){
-		$param=$this->input->post();
-		$data=$this->Pelanggan_model->insert();
-		if($data==null){
-			$result['message']="Data Pelanggan berhasil ditambah.";
-		}
-		echo json_encode($result);
-	}
+    public function insert(){
+        $result = sendRequest("POST", "master/pelanggan/insert", $_POST['data'], true);
+        echo json_encode($result);
+    }
 
-	public function update(){
-		$param=$this->input->post();
-		$data=$this->Pelanggan_model->updateById($param['id']);
-		if($data==null){
-			$result['message']="Data Pelanggan berhasil diubah.";
-		}
-		echo json_encode($result);
-	}
+    public function update(){
+        $result = sendRequest("POST", "master/pelanggan/update", $_POST['data'], false);
+        echo json_encode($result);
+    }
 
-	public function delete_row(){
-		$param=$this->input->post();
-		$data=$this->Pelanggan_model->delete($param['id']);
-		$result['message']="Data Pelanggan berhasil dihapus.";
+	public function drop(){
+		$result = sendRequest("POST", "master/pelanggan/delete", $_POST['data'], false);
 		echo json_encode($result);
 	}
 
 	public function getPerkode(){
-        $result = sendRequest("GET", "master/pelanggan/getPerkode/".$_POST['id'], [], "api");
+        $result = sendRequest("GET", "master/pelanggan/getPerkode/".$_POST['id'], [], true);
         echo json_encode($result);
 	}
 

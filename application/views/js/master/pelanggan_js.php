@@ -12,11 +12,6 @@
 
 	$(function(){
 		filter();
-		// inputterbilang();
-		// var rupiah = document.getElementById('txt-tagihan');
-		// rupiah.addEventListener('keyup', function(e){
-			// rupiah.value = formatRupiah(this.value, 'Rp ');
-		// });
 
 		$('#cmb-layanan').select2({
 			dropdownParent:$('#win-tambah_pelanggan'),
@@ -25,9 +20,9 @@
 		});
 
 		$('#btn-tambah').click(function(event) {
-			$('#win-tambah_pelanggan').window({
-				onOpen:function(){
-					reset_form();
+            $('#win-tambah_pelanggan').window({
+                onOpen:function(){
+                    reset_form();
 				}
 			});  
 			$('#div_update').hide();
@@ -36,7 +31,7 @@
 			view=false;
 			var row=$('#dg-pelanggan').datagrid('getSelected');
 			if(row==null){
-				$.messager.alert('Warning!','Tidak ada data yang dipilih.')
+                $.messager.alert('Warning!','Tidak ada data yang dipilih.')
 				return false;
 			}
 			getData(row);
@@ -51,7 +46,11 @@
 			getData(row);
 		});
 		$('#btn-hapus').click(function(event) {
-			delete_row();
+            var row=$('#dg-pelanggan').datagrid('getSelected');
+            if(row==null){
+                $.messager.alert('Warning!','Tidak ada data yang dipilih.');
+            }
+			drop(row);
 		});
 		$('#dg-pelanggan').datagrid({
 			singleSelect:true,
@@ -98,15 +97,15 @@
 		})
 	}
 
-	function create(){
-		var kode=$('#txt-kode_pelanggan').val();
-    	var layanan=$('#cmb-layanan option:selected').val();
-    	var nama_pelanggan=$('#txt-nama_pelanggan').val();
-    	var tagihan=$('#txt-tagihan').val();
-    	var terbilang=$('#txt-terbilang').val();
-    	var operasional=$('#txt-operasional').val();
+    function insert(){
+		var kode   = $('#txt-kode_pelanggan').val();
+		var layanan = $('#cmb-layanan option:selected').val();
+        var nama_pelanggan = $('#txt-nama_pelanggan').val();
+        var tagihan = $('#txt-tagihan').val();
+        var terbilang = $('#txt-terbilang').val();
+        var operasional = $('#txt-operasional').val();
 
-    	if (kode=='') {
+        if (kode=='') {
 	      	$.messager.alert('Warning!', 'ID Pelanggan tidak boleh kosong.');
 	      	return false;
 	    }
@@ -131,53 +130,99 @@
 	      	return false;
 	    }
 
-	    $.ajax({
-			url     :"<?php echo base_url("master/pelanggan/create"); ?>",
-			type    :"POST",
-			dataType:'json',
-			data    :'kode='+kode+'&layanan='+layanan+'&nama_pelanggan='+nama_pelanggan+'&tagihan='+toUang(tagihan)+'&terbilang='+terbilang+'&operasional='+operasional,
-	    	success:function(data, textStatus, jqXHR){
-	    		$.messager.alert('Success!',data.message);
-	    		$('#win-tambah_pelanggan').window('close');
-	    		filter();
-	    	},
-	    	error:function(jqXHR, textStatus, errorThrown){
-              	alert('Error,something goes wrong');
+        data={
+			kode  : kode,
+			layanan: layanan,
+            nama_pelanggan: nama_pelanggan,
+            tagihan: toUang(tagihan),
+            terbilang: terbilang,
+            operasional: operasional,
+        }
+        $.ajax({
+			url     : "<?php echo base_url("master/pelanggan/insert"); ?>",
+			type    : "POST",
+			dataType: 'json',
+			data    :{
+            	data: data,
+            },
+          	beforeSend: function (){               
+           	},
+          	success:function(data, textStatus, jqXHR){
+            	$('#win-tambah_pelanggan').window('close');
+            	$.messager.alert('Success!',data.status.message);
+            	filter();
           	},
-          	complete:function(){
-          		//
-          	}
-	    })
-	}
-
-	function update(){
-		var id=$('#txt-id').val();
-    	var kode=$('#txt-kode_pelanggan').val();
-    	var layanan=$('#cmb-layanan option:selected').val();
-    	var nama_pelanggan=$('#txt-nama_pelanggan').val();
-    	var tagihan=$('#txt-tagihan').val();
-    	var terbilang=$('#txt-terbilang').val();
-    	var operasional=$('#txt-operasional').val();
-
-    	$.ajax({
-			url     :"<?php echo base_url("master/pelanggan/update"); ?>",
-			type    :"POST",
-			dataType:'json',
-			data    :'id='+id+'&kode='+kode+'&layanan='+layanan+'&nama_pelanggan='+nama_pelanggan+'&tagihan='+toUang(tagihan)+'&terbilang='+terbilang+'&operasional='+operasional,
-    		success:function(data){
-    			$.messager.alert('Success!',data.message);
-				$('#win-tambah_pelanggan').window('close');
-				filter();
-    		},
-    		error:function(jqXHR, textStatus, errorThrown){
-              	alert('Error,something goes wrong');
+          	error: function(jqXHR, textStatus, errorThrown){
           	},
-          	complete:function(){
-          		//
+          	complete: function(){
           	}
+        }); 
+    }
 
-    	})
-	}
+    function update(){
+        var id=$('#txt-id').val();
+		var kode   = $('#txt-kode_pelanggan').val();
+		var layanan = $('#cmb-layanan option:selected').val();
+        var nama_pelanggan = $('#txt-nama_pelanggan').val();
+        var tagihan = $('#txt-tagihan').val();
+        var terbilang = $('#txt-terbilang').val();
+        var operasional = $('#txt-operasional').val();
+
+        if (kode=='') {
+	      	$.messager.alert('Warning!', 'ID Pelanggan tidak boleh kosong.');
+	      	return false;
+	    }
+	    if (layanan=='') {
+	      	$.messager.alert('Warning!', 'Layanan tidak boleh kosong.');
+	      	return false;
+	    }
+	    if (nama_pelanggan=='') {
+	      	$.messager.alert('Warning!', 'Nama Pelanggan tidak boleh kosong.');
+	      	return false;
+	    }
+	    if (tagihan=='') {
+	      	$.messager.alert('Warning!', 'Tagihan tidak boleh kosong.');
+	      	return false;
+	    }
+	    if (terbilang=='') {
+	      	$.messager.alert('Warning!', 'Terbilang tidak boleh kosong.');
+	      	return false;
+	    }
+	    if (operasional=='') {
+	      	$.messager.alert('Warning!', 'Operasional tidak boleh kosong.');
+	      	return false;
+	    }
+
+        data={
+            id:id,
+			kode  : kode,
+			layanan: layanan,
+            nama_pelanggan: nama_pelanggan,
+            tagihan: toUang(tagihan),
+            terbilang: terbilang,
+            operasional: operasional,
+        }
+        // console.log(data);
+        $.ajax({
+			url     : "<?php echo base_url("master/pelanggan/update"); ?>",
+			type    : "POST",
+			dataType: 'json',
+			data    :{
+            	data: data,
+            },
+          	beforeSend: function (){               
+           	},
+          	success:function(data, textStatus, jqXHR){
+            	$('#win-tambah_pelanggan').window('close');
+            	$.messager.alert('Success!',data.status.message);
+            	filter();
+          	},
+          	error: function(jqXHR, textStatus, errorThrown){
+          	},
+          	complete: function(){
+          	}
+        }); 
+    }
 
 	function getData(row){
 		$.ajax({
@@ -186,12 +231,11 @@
 			dataType:'json',
 			data    :{id:row.id},
 			success:function(data){
-				$('#win-tambah_pelanggan').window({
-					onOpen:function(){
-						set_form(data.data);
+                $('#win-tambah_pelanggan').window({
+                    onOpen:function(){
+                        set_form(data.data);
 					}
 				});
-          		// set_form(data);
 			},
 			error:function(jqXHR, textStatus, errorThrown){
               	alert('Error,something goes wrong');
@@ -245,21 +289,21 @@
 		}
 	}
 
-	function delete_row(){
-		var row=$('#dg-pelanggan').datagrid('getSelected');
-		if(row==null){
-			$.messager.alert('Warning!','Tidak ada data yang dipilih.');
-		}
+	function drop(row){
+        var id = row.id;
+        data={
+			id: id
+        }
 		$.messager.confirm('Confirm','Apakah Anda yakin ingin menghapus Data Pelanggan ?',function(r){
 			if(r){
 				var row=$('#dg-pelanggan').datagrid('getSelected');
 				$.ajax({
-					url:"<?php echo base_url("master/pelanggan/delete_row");?>",
+					url:"<?php echo base_url("master/pelanggan/drop");?>",
 					type:"POST",
 					dataType:'json',
-					data:{id:row.id},
+					data:{data:data},
 					success:function(data){
-						$.messager.alert('Success!',data.message);
+						$.messager.alert('Success!',data.status.message);
 		            	filter();
 					},
 					error:function(jqXHR, textStatus, errorThrown){

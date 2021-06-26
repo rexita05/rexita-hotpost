@@ -94,16 +94,16 @@
             </div>
         </div>
         <div class="form-group row">
+            <div id="div_simpan" class="col-sm-3" style="margin-top: 25px; padding: 2px;">
+                <button onclick="insert();" type="button" class="btn btn-block btn-success custom-btn-pink">
+                    <i class="fa fa-save"></i>
+                    Simpan
+                </button>
+            </div>
             <div id="div_update" class="col-sm-3" style="margin-top: 25px; padding: 2px;">
                 <button onclick="update();" type="button" class="btn btn-block btn-success custom-btn-pink">
                     <i class="fa fa-save"></i>
                     Update
-                </button>
-            </div>
-            <div id="div_simpan" class="col-sm-3" style="margin-top: 25px; padding: 2px;">
-                <button onclick="create();" type="button" class="btn btn-block btn-success custom-btn-pink">
-                    <i class="fa fa-save"></i>
-                    Simpan
                 </button>
             </div>
             <div class="col-sm-3" style="margin-top: 25px; padding: 2px;">
