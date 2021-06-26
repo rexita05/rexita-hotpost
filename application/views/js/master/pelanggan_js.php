@@ -224,6 +224,34 @@
         }); 
     }
 
+    function drop(row){
+        var id = row.id;
+        data={
+			id: id
+        }
+		$.messager.confirm('Confirm','Apakah Anda yakin ingin menghapus Data Pelanggan ?',function(r){
+			if(r){
+				var row=$('#dg-pelanggan').datagrid('getSelected');
+				$.ajax({
+					url:"<?php echo base_url("master/pelanggan/d");?>",
+					type:"POST",
+					dataType:'json',
+					data:{data:data},
+					success:function(data){
+						$.messager.alert('Success!',data.status.message);
+		            	filter();
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+		              	alert('Error,something goes wrong');
+		          	},
+		          	complete:function(){
+		            	//
+		          	}
+				})
+			}
+		})
+	}
+
 	function getData(row){
 		$.ajax({
             url     :"<?php echo base_url("master/pelanggan/getPerkode"); ?>",
@@ -287,34 +315,6 @@
 	    	$('#div_simpan').hide();
 	    	$('#div_update').show();
 		}
-	}
-
-	function drop(row){
-        var id = row.id;
-        data={
-			id: id
-        }
-		$.messager.confirm('Confirm','Apakah Anda yakin ingin menghapus Data Pelanggan ?',function(r){
-			if(r){
-				var row=$('#dg-pelanggan').datagrid('getSelected');
-				$.ajax({
-					url:"<?php echo base_url("master/pelanggan/drop");?>",
-					type:"POST",
-					dataType:'json',
-					data:{data:data},
-					success:function(data){
-						$.messager.alert('Success!',data.status.message);
-		            	filter();
-					},
-					error:function(jqXHR, textStatus, errorThrown){
-		              	alert('Error,something goes wrong');
-		          	},
-		          	complete:function(){
-		            	//
-		          	}
-				})
-			}
-		})
 	}
 
 	function reset_form(){
