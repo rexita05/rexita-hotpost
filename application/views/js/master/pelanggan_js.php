@@ -129,7 +129,6 @@
 	      	$.messager.alert('Warning!', 'Operasional tidak boleh kosong.');
 	      	return false;
 	    }
-
         data={
 			kode  : kode,
 			layanan: layanan,
