@@ -5,10 +5,11 @@ class Hotspot extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model('Pelanggan_model');
 		$this->load->helper('form');
 		$this->load->helper('url');
-		$this->load->helper('function_helper');
+		$this->load->helper('api_helper');
+        $this->load->helper('function_helper');
+        $this->load->model('Pelanggan_model');
 	}
 
 	public function index()
@@ -18,29 +19,18 @@ class Hotspot extends CI_Controller {
 		$this->load->view('template', $this->data);
 	}
 
-	public function filter() {
-		$object = $this->Pelanggan_model->getPelanggan();
-	    echo json_encode($object);
-
-	    // $page = !is_null($this->input->post('page')) ? $this->input->post('page') : 1;
-     //    $rows = !is_null($this->input->post('rows')) ? $this->input->post('rows') : 10;
-
-     //    $offset = ($page - 1) * $rows;
-	    // $query="SELECT*FROM pelanggan";
-
-     //    $result = array();
-     //    $result['total'] = $this->db->query($query)->num_rows();
-
-     //    $rows = array();
-
-     //    $rows = $this->db->query($query)->result_array();
-     //    $result = array_merge($result, ['rows' => $rows]);
-	    // echo json_encode($result);
+	public function filter(){
+        $param=$this->input->post();
+        $criteria="";
+        if($param['criteria']!=null || $param['criteria']!=""){
+            $criteria="/".$param['criteria'];
+        }
+        $result = sendRequest("POST", "master/pelanggan/search".$criteria, [], false);
+        echo json_encode($result);
 	}
 
 	public function print_out(){
 		$param = $this->input->post();
-        // print_r($_POST['diskon']);die();
 		$data  = $this->Pelanggan_model->print_out();
 
 		$master['id'] = $param['id'];

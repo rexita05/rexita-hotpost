@@ -1,14 +1,12 @@
 <script type="text/javascript">
 	$(function(){
 		filter();
-        // $('#txt-diskon').onFocus('');
 		$('#btn-print_preview').click(function(event) {
 			var row = $('#dg-pembayaran_pelanggan').datagrid('getSelected');
 			if(row==null){
 				$.messager.alert('Warning!','Tidak ada data yang dipilih.');
 				return false;
 			}
-			// print_preview(row);
 			print_preview(row);
 		});
 		$('#btn-bayar').click(function(event) {
@@ -115,21 +113,22 @@
 	function filter(){
     	var dg = $('#dg-pembayaran_pelanggan').datagrid('loadData',[]);
     	var criteria = $('#txt-search').val();
-		
+		data={
+            criteria : criteria,
+        }
         $.ajax({
 			url     : "<?php echo base_url("pembayaran/hotspot/filter"); ?>",
 			type    : "POST",
 			dataType: 'json',
+            data:data,
 	    	success:function(data, textStatus, jqXHR){
-	    		// console.log(data);
-	        	$('#dg-pembayaran_pelanggan').datagrid('loadData', data);
+	        	$('#dg-pembayaran_pelanggan').datagrid('loadData',data.data);
 	      	},
 	      	error: function(jqXHR, textStatus, errorThrown){
 	          	alert('Error,something goes wrong');
 	      	},
 	      	complete: function(){
-	        	$('#btn-save').prop('disabled', false);
-	        	$('#btn-save').html('Save');
+	        	//
 	      	}
 	    });
     }
@@ -139,10 +138,7 @@
     	var nesindo ="CV. NETWORK ECOS SYSTEM INDONESIA (NESINDO)";
         row = $("#dg-pembayaran_pelanggan").datagrid("getSelected");
         diskon = row.jml_diskon;
-        if(diskon==undefined){
-            diskon=0;
-        }
-        else if(diskon==''){
+        if(diskon==undefined || diskon==''){
             diskon=0;
         }
         // console.log(row.jml_diskon);
