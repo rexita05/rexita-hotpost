@@ -232,7 +232,7 @@
 			if(r){
 				var row=$('#dg-pelanggan').datagrid('getSelected');
 				$.ajax({
-					url:"<?php echo base_url("master/pelanggan/d");?>",
+					url:"<?php echo base_url("master/pelanggan/drop");?>",
 					type:"POST",
 					dataType:'json',
 					data:{data:data},
