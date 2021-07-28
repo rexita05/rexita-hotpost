@@ -4,12 +4,6 @@ function sendRequest($method, $url, $data, $type = false)
 {
   $headers = array();
   $headers[]  = "Content-Type: application/json";
-//   $headers[]  = "Host: 127.0.0.1";
-
-//   if (isset($_SESSION['token'])) {
-//     $token =  $_SESSION['token'];
-//     $headers[]  = 'Authorization: Bearer ' . $token;
-//   }
 
   $curl_handle = curl_init();
   curl_setopt($curl_handle, CURLOPT_URL, API . $url);
