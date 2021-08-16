@@ -3,7 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Hotspot extends CI_Controller {
 
-	function __construct(){
+	function __construct()
+    {
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->helper('url');
@@ -19,7 +20,8 @@ class Hotspot extends CI_Controller {
 		$this->load->view('template', $this->data);
 	}
 
-	public function filter(){
+	public function filter()
+    {
         $param=$this->input->post();
         $criteria="";
         if($param['criteria']!=null || $param['criteria']!=""){
@@ -29,7 +31,8 @@ class Hotspot extends CI_Controller {
         echo json_encode($result);
 	}
 
-	public function print_out(){
+	public function print_out()
+    {
 		$param = $this->input->post();
 		$data  = $this->Pelanggan_model->print_out();
 
@@ -82,7 +85,7 @@ class Hotspot extends CI_Controller {
         // else{
         //     $diskon=$_POST['diskon'];
         // }
-		$denda=0;
+		$denda=$_POST['denda'];
 		$total=$master['tagihan']+$denda-$diskon;
 		// $grand_tot=$total-$diskon;
         $html.='

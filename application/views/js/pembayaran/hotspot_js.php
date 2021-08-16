@@ -24,7 +24,12 @@
 				{field:'kode',title:'ID Pelanggan',width:"13%",halign:'center',align:'left'},
 				{field:'nama_pelanggan',title:'Nama Pelanggan',width:"17%",halign:'center',align:'left'},
 				{field:'operasional',title:'Operasional',width:"25%",halign:'center',align:'left'},
-                {field:'jml_diskon',title:'Diskon (Harga)',width:"10%",halign:'center',align:'right', formatter: formatIndo,
+                {field:'jml_diskon',title:'Diskon (Rp)',width:"10%",halign:'center',align:'right', formatter: formatIndo,
+                    editor : {
+                        'type':'numberbox',
+                    }
+                },
+                {field:'jml_denda',title:'Denda (Rp)',width:"10%",halign:'center',align:'right', formatter: formatIndo,
                     editor : {
                         'type':'numberbox',
                     }
@@ -106,7 +111,6 @@
             $.messager.alert('Warning!','Tidak ada data yang dipilih.');
             return false;
         }
-        // print_preview(row);
         print_preview(row);
     }
 	
@@ -138,10 +142,13 @@
     	var nesindo ="CV. NETWORK ECOS SYSTEM INDONESIA (NESINDO)";
         row = $("#dg-pembayaran_pelanggan").datagrid("getSelected");
         diskon = row.jml_diskon;
+        denda = row.jml_denda;
         if(diskon==undefined || diskon==''){
             diskon=0;
         }
-        // console.log(row.jml_diskon);
+        if(denda==undefined || denda==''){
+            denda=0;
+        }
     	$.ajax({
 			url     :"<?php echo base_url("pembayaran/hotspot/print_out"); ?>",
 			type    :"POST",
@@ -155,6 +162,7 @@
 				tagihan       :row.tagihan,
 				terbilang     :row.terbilang,
                 diskon        :diskon,
+                denda         :denda,
 				nesindo       :nesindo,
 			},
 			success:function(data){
