@@ -156,7 +156,7 @@ class Hotspot extends CI_Controller {
 		
         $pdf->writeHTML($html, true, false, true, false);
         // $pdf->IncludeJS("print();");
-        $pdf->Output("assets/file/".$master['kode'].".pdf", "F");
+        $pdf->Output('assets/file/'.$master['kode'].".pdf", "F");
         $return["success"] = TRUE;
         $return['data'] = $param;
         echo json_encode($return);
